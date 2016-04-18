@@ -58,15 +58,15 @@ angular
 .config(function ($routeProvider) {
   $routeProvider
   .when('/', {
-    templateUrl: '/templates/list.html',
+    templateUrl: 'templates/list.html',
     controller: 'SearchController'
   })
   .when('/archive', {
-    templateUrl: '/templates/archive.html',
+    templateUrl: 'templates/archive.html',
     controller: 'ArchiveController'
   })
   .when('/about', {
-    templateUrl: '/templates/list.html',
+    templateUrl: 'templates/list.html',
     controller: 'AboutController'
   })
   .otherwise({
@@ -77,11 +77,11 @@ angular
   $q.when(db.info())
   // list contents of text folder
   .then(function (info) {
-    return $http.get('/txt/').then(function (response) {
-      var matches = response.data.match(/<a href="\/txt\/([\w\d_]+).md/g)
-      return matches.map(function (match) {
-        var path = match.split('href="')[1]
-        var id = path.split('/txt/')[1].slice(0, -3)
+    return $http.get('list.txt').then(function (response) {
+      var lines = response.data.split('\n')
+      return lines.map(function (line) {
+        var path = ['txt', line].join('/')
+        var id = line.slice(0, -3) // chops off .md
         return {
           path: path,
           _id: id
@@ -99,6 +99,7 @@ angular
   // download each file in the folder
   // and save each to pouchdb
   .then(function (posts) {
+    console.log(posts)
     var promises = posts.map(function (post) {
       return $http.get(post.path)
       .then(function (response) {

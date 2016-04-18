@@ -12,4 +12,4 @@ of course i'd write dystopic microfiction, mostly ported from my facebook, in th
 
 idk
 
-[enjoy](/#/)
+[enjoy](#/)
