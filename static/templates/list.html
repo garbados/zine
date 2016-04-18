@@ -1,0 +1,14 @@
+<article class="row post" ng-repeat="post in posts | orderBy:'datetime':true">
+	<div class="col-xs-2" id="{{post._id}}">
+		<p><a ng-href="#/?date={{post.datetime | date:'yyyy-MM-dd'}}">{{post.datetime | date:'MM/dd/yyyy'}}</a> {{post.datetime | date:'hh:mm a'}}</p>
+		<ul class="nav nav-pills nav-stacked">
+			<li ng-repeat="person in post.people">
+				<a ng-href="#/?person={{person}}">@{{person}}</a>
+			</li>
+			<li ng-repeat="tag in post.tags">
+				<a ng-href="#/?tag={{tag}}">#{{tag}}</a>
+			</li>
+		</ul>
+	</div>
+	<div class="col-xs-10 well" ng-bind-html="post.text | markdown"></div>
+</article>
