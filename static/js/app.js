@@ -145,7 +145,8 @@ angular
     $location.url('/about')
   })
   // if already installed, update DOM
-  .catch(function () {
+  .catch(function (err) {
+    console.log(err)
     $scope.loaded = true
   })
 })
