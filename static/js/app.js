@@ -78,7 +78,7 @@ angular
   // list contents of text folder
   .then(function (info) {
     return $http.get('list.txt').then(function (response) {
-      var lines = response.data.split('\n')
+      var lines = response.data.split('\n').slice(0, -1) // file ends in \n
       return lines.map(function (line) {
         var path = ['txt', line].join('/')
         var id = line.slice(0, -3) // chops off .md
@@ -146,7 +146,6 @@ angular
   })
   // if already installed, update DOM
   .catch(function (err) {
-    console.log(err)
     $scope.loaded = true
   })
 })
