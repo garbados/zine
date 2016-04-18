@@ -11,6 +11,6 @@ even the folks who want synths free still think of them as strange and other. in
 
 i don't mean that trans people are like synths because gender is fake or whatever. characters in the game treat synths much like cis people treat trans people. synths working to help other synths display babytran/eldertran structures i observe in our community. one synth remarks, "my safehouse kiddies need me to make some booms" in a voice and cadence i have heard from sisters looking out for each other. the presence of KLE0 as a transmisogynistic joke leads me to believe fallout's writers don't know any trans people, and so the resemblance of synths to trans people is probably a coincidence. but as a trans person, idk, it turns much of the shitty writing into poignant displays of privilege and prejudice. and it makes blowing up the prydwyn that much more satisfying :D
 
-![prydwen exploding](/img/prydwen.jpg)
+![prydwen exploding](img/prydwen.jpg)
 
 [zodiac]: http://web.archive.org/web/20160317213624/http://thinkprogress.org/lgbt/2015/11/29/3726311/ted-cruz-planned-parenthood-shooting-transgendered/

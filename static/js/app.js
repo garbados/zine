@@ -84,7 +84,6 @@ angular
           return (line.length > 0)
         })
         .map(function (line) {
-          console.log(line)
           var path = ['txt', line].join('/')
           var id = line.slice(0, -3) // chops off .md
           return {
@@ -104,7 +103,6 @@ angular
   // download each file in the folder
   // and save each to pouchdb
   .then(function (posts) {
-    console.log(posts)
     var promises = posts.map(function (post) {
       return $http.get(post.path)
       .then(function (response) {
