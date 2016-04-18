@@ -78,15 +78,20 @@ angular
   // list contents of text folder
   .then(function (info) {
     return $http.get('list.txt').then(function (response) {
-      var lines = response.data.split('\n').slice(0, -1) // file ends in \n
-      return lines.map(function (line) {
-        var path = ['txt', line].join('/')
-        var id = line.slice(0, -3) // chops off .md
-        return {
-          path: path,
-          _id: id
-        }
-      })
+      var lines = response.data.split('\n')
+      return lines
+        .filter(function (line) {
+          if (line) return true
+          else return false
+        })
+        .map(function (line) {
+          var path = ['txt', line].join('/')
+          var id = line.slice(0, -3) // chops off .md
+          return {
+            path: path,
+            _id: id
+          }
+        })
     }).then(function (posts) {
       // compare db info with txt folder contents to see if zine is up-to-date
       if (info.doc_count - posts.length !== 1) {
