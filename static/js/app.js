@@ -81,10 +81,11 @@ angular
       var lines = response.data.split('\n')
       return lines
         .filter(function (line) {
-          if (line) return true
+          if (line.length > 0) return true
           else return false
         })
         .map(function (line) {
+          console.log(line)
           var path = ['txt', line].join('/')
           var id = line.slice(0, -3) // chops off .md
           return {
