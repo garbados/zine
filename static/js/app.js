@@ -26,8 +26,8 @@ angular
     date: {
       map: function (doc) {
         if (doc.datetime) {
-          var parts = doc.datetime.split('T')[0].split('-')
-          emit([parts[0], parts[1], parts[2]])
+          var date = doc.datetime.split('T')[0]
+          emit(date)
         }
       }.toString(),
       reduce: '_count'
@@ -73,17 +73,10 @@ angular
     redirectTo: '/'
   })
 })
-.controller('SetupController', function ($scope, db, ddoc, $http, $q) {
-  // check pouchdb to see if zine has already been installed
+.controller('SetupController', function ($scope, db, ddoc, $http, $q, $location) {
   $q.when(db.info())
-  .then(function (info) {
-    if (info && info.doc_count !== 0) {
-      // throws an error to skip .then clauses
-      throw new Error("Already installed. Skipping setup...")
-    }
-  })
   // list contents of text folder
-  .then(function () {
+  .then(function (info) {
     return $http.get('/txt/').then(function (response) {
       var matches = response.data.match(/<a href="\/txt\/([\w\d_]+).md/g)
       return matches.map(function (match) {
@@ -94,6 +87,13 @@ angular
           _id: id
         }
       })
+    }).then(function (posts) {
+      // compare db info with txt folder contents to see if zine is up-to-date
+      if (info.doc_count - posts.length !== 1) {
+        return posts
+      } else {
+        throw new Error("Already installed. Skipping setup...")
+      }
     })
   })
   // download each file in the folder
@@ -138,9 +138,10 @@ angular
       return $q.all(promises)
     })
   })
-  // once finished, update DOM
+  // once finished, update DOM, redirect to about
   .then(function () {
     $scope.loaded = true
+    $location.url('/about')
   })
   // if already installed, update DOM
   .catch(function () {
@@ -193,7 +194,22 @@ angular
     get_posts()
 })
 .controller('NavController', function ($scope, $location) {
-  // TODO search buttons
+  // search buttons
+  var search = {
+    tags: function () {
+      $location.url('/?tag=' + $scope.query)
+    },
+    dates: function () {
+      $location.url('/?date=' + $scope.query)
+    },
+    people: function () {
+      $location.url('/?person=' + $scope.query)
+    },
+    text: function () {
+      $location.url('/?text=' + $scope.query)
+    }
+  }
+  $scope.search = search
 })
 .controller('ArchiveController', function ($scope, db) {
   function get_archive () {
@@ -202,7 +218,7 @@ angular
       $scope.$apply(function () {
         $scope.dates = response.rows.map(function (row) {
           return {
-            value: [row.key[0], row.key[1] - 1, row.key[2]].join('-')
+            value: row.key,
             count: row.value
           }
         })
