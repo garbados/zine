@@ -81,8 +81,7 @@ angular
       var lines = response.data.split('\n')
       return lines
         .filter(function (line) {
-          if (line.length > 0) return true
-          else return false
+          return (line.length > 0)
         })
         .map(function (line) {
           console.log(line)
