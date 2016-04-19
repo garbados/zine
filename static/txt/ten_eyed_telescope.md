@@ -10,4 +10,4 @@ it sings its findings into the biosphere, transmitting its entire neural state a
 
 they are clones of elder things, cuttings from branches and ejected limbs. someday, our ten-eyed telescope will drop a tentacle to the ground, where it will dream a life all its own, and join the planetsong with its own voice.
 
-i spend my nights dreaming with them colonthree emoticon
+i spend my nights dreaming with them :3

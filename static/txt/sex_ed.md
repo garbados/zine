@@ -19,6 +19,6 @@ Tommy's face lit up. Apparently manhood sounded like a swell idea.
 
 "At night, Tommy's body may hurt from all these changes. His back will ache as he grows taller, and his shoulders and legs may burn with pain. This is normal! You're just entering manhood." Tommy lay in bed, writhing.
 
-"Tommy's nether parts may start to feel funny. Funny good, sometimes, and sometimes funny bad. An existential dread comes over him as he lies awake, feeling ashamed of his body. He wonders, is this manhood? Yes, Tommy! Angst and anger and self-loathing are all part of the puzzle. Your body is hauling you into a new part of your life, kicking and screaming the whole way. You may delight in what meager breast growth this hormonal maelstrom grants you, but hope never lasts! That growth will recede just like your hairline in due time. Accept your body as a prison and smile through your teeth as you beg for death."
+"Tommy's nether parts may start to feel funny. Funny good, sometimes, and sometimes funny bad. An existential dread comes over him as he lies awake, feeling ashamed of his body. He wonders, is this manhood? Yes, Tommy! Angst and anger and self-loathing are all part of the puzzle. Your body is hauling you into a new part of your life, kicking and screaming the whole way. Accept your body as a prison and smile through your teeth as you beg for death."
 
 Then I woke up. The movie was over. Mr. Clancy began disassembling the projector and asked, "Any questions?"
