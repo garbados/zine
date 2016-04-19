@@ -220,12 +220,36 @@ angular
     db.query('index/date', {group:true})
     .then(function (response) {
       $scope.$apply(function () {
-        $scope.dates = response.rows.map(function (row) {
+        // TODO develop date range from earliest post to latest post
+        // TODO list all dates inbetween
+        // TODO join the list of posts into it
+        var date_counts = response.rows.map(function (row) {
+          var parts = row.key.split('-')
           return {
-            value: row.key,
+            value: new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])),
             count: row.value
           }
         })
+        var earliest_date = date_counts[0]
+        var latest_date = date_counts[date_counts.length-1]
+        var date_range = [earliest_date]
+        var unassigned_dates = date_counts.slice(1)
+        var _date = new Date(earliest_date.value)
+        while (_date.getTime() <= latest_date.value.getTime()) {
+          // add either a known date count or a default to the range of dates
+          if (_date.toLocaleDateString() === unassigned_dates[0].value.toLocaleDateString()) {
+            date_range.push(unassigned_dates[0])
+            unassigned_dates = unassigned_dates.slice(1)
+          } else {
+            date_range.push({
+              value: new Date(_date),
+              count: 0
+            })
+          }
+          // increment day
+          _date.setDate(_date.getDate() + 1)
+        }
+        $scope.dates = date_range
       })
     })
     .catch(function (err) {

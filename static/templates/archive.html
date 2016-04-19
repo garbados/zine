@@ -1,8 +1,11 @@
-<p>TODO doesn't match intended spec</p>
 <article class="row archive">
-	<ul>
-		<li ng-repeat="date in dates | orderBy:'date.value':true">
-			<a ng-href="#/?date={{date.value}}">{{date.value}}</a>: {{date.count}}
-		</li>
-	</ul>
+	<div ng-repeat="date in dates | orderBy:'date.value':true">
+		<a ng-class="{'btn-primary': date.count == 1, 'btn-default': date.count == 0, 'btn-success': date.count > 1}"
+		   class="btn col-xs-2"
+		   ng-disabled="date.count == 0"
+		   ng-href="#/?date={{date.value | date:'yyyy-MM-dd'}}">
+			<span class="">{{date.value | date:'MM/dd/yyyy'}}</span>
+			<span class="badge">{{date.count}}</span>
+		</a>
+	</div>
 </article>
