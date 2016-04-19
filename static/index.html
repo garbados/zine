@@ -12,7 +12,9 @@
 	<a href="https://github.com/garbados/zine"><img style="position: absolute; top: 0; right: 0; border: 0;" src="img/fork_me_fuck_you_2.png" alt="Fuck you, pay me"></a>
 	<div class="container">
 		<header class="row">
-			<h1 class="col-xs-12">heck the planet <small>a fucking zine</small></h1>
+			<h1 class="col-xs-12">heck the planet <small>a fucking zine</small>
+			<button ng-controller="UninstallController" ng-click="uninstall()" class="btn btn-link pull-right">Update Zine</button>
+			</h1>
 		</header>
 		<section class="row loading-screen" ng-controller="SetupController" ng-hide="loaded">
 			<div class="jumbotron text-center">

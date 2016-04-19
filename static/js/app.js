@@ -142,15 +142,25 @@ angular
       return $q.all(promises)
     })
   })
-  // once finished, update DOM, redirect to about
+  // once finished, update DOM
   .then(function () {
     $scope.loaded = true
-    $location.url('/about')
   })
   // if already installed, update DOM
   .catch(function (err) {
+    if (err.message !== 'Already installed. Skipping setup...') {
+      console.trace(err)
+    }
     $scope.loaded = true
   })
+})
+.controller('UninstallController', function ($scope, db, $window) {
+  $scope.uninstall = function () {
+    db.destroy().then(function () {
+      // reload the page
+      $window.location.reload()
+    })
+  }
 })
 .controller('SearchController', function ($scope, db, $location) {
   function get_posts (index, keys) {
@@ -219,36 +229,35 @@ angular
   function get_archive () {
     db.query('index/date', {group:true})
     .then(function (response) {
-      $scope.$apply(function () {
-        // TODO develop date range from earliest post to latest post
-        // TODO list all dates inbetween
-        // TODO join the list of posts into it
-        var date_counts = response.rows.map(function (row) {
-          var parts = row.key.split('-')
-          return {
-            value: new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])),
-            count: row.value
-          }
-        })
-        var earliest_date = date_counts[0]
-        var latest_date = date_counts[date_counts.length-1]
-        var date_range = [earliest_date]
-        var unassigned_dates = date_counts.slice(1)
-        var _date = new Date(earliest_date.value)
-        while (_date.getTime() <= latest_date.value.getTime()) {
-          // add either a known date count or a default to the range of dates
-          if (_date.toLocaleDateString() === unassigned_dates[0].value.toLocaleDateString()) {
-            date_range.push(unassigned_dates[0])
-            unassigned_dates = unassigned_dates.slice(1)
-          } else {
-            date_range.push({
-              value: new Date(_date),
-              count: 0
-            })
-          }
-          // increment day
-          _date.setDate(_date.getDate() + 1)
+      var date_counts = response.rows.map(function (row) {
+        var parts = row.key.split('-')
+        return {
+          value: new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])),
+          count: row.value
         }
+      })
+      // develop date range from earliest post to latest post
+      var earliest_date = date_counts[0]
+      var latest_date = date_counts[date_counts.length-1]
+      // list all dates inbetween
+      var date_range = [earliest_date]
+      var unassigned_dates = date_counts.slice(1)
+      var _date = new Date(earliest_date.value)
+      while (_date.getTime() <= latest_date.value.getTime()) {
+        // add either a known date count or a default to the range of dates
+        if (_date.toLocaleDateString() === unassigned_dates[0].value.toLocaleDateString()) {
+          date_range.push(unassigned_dates[0])
+          unassigned_dates = unassigned_dates.slice(1)
+        } else {
+          date_range.push({
+            value: new Date(_date),
+            count: 0
+          })
+        }
+        // increment day
+        _date.setDate(_date.getDate() + 1)
+      }
+      $scope.$apply(function () {
         $scope.dates = date_range
       })
     })
@@ -257,7 +266,7 @@ angular
         // AND ANOTHER ONE
         get_archive()
       } else {
-        console.log(arguments)
+        console.trace(arguments)
       }
     })
   }
@@ -277,7 +286,7 @@ angular
         // AND ANOTHER ONE
         get_about()
       } else {
-        console.log(arguments)
+        console.trace(arguments)
       }
     })
   }

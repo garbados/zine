@@ -1,4 +1,3 @@
-Friday, November 6, 2015 at 9:47am PST
 datetime: 2015-11-06T09:47:00.000Z
 tags: fiction
 
