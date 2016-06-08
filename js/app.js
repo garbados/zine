@@ -73,7 +73,11 @@ angular
     redirectTo: '/'
   })
 })
-.controller('SetupController', function ($scope, db, ddoc, $http, $q, $location) {
+.controller('SetupController', function ($scope, $rootScope, db, ddoc, $http, $q, $location) {
+  $scope.i_consent = function () {
+    $rootScope.consent = true
+  }
+
   $q.when(db.info())
   // list contents of text folder
   .then(function (info) {
@@ -144,14 +148,14 @@ angular
   })
   // once finished, update DOM
   .then(function () {
-    $scope.loaded = true
+    $rootScope.loaded = true
   })
   // if already installed, update DOM
   .catch(function (err) {
     if (err.message !== 'Already installed. Skipping setup...') {
       console.trace(err)
     }
-    $scope.loaded = true
+    $rootScope.loaded = true
   })
 })
 .controller('UninstallController', function ($scope, db, $window) {

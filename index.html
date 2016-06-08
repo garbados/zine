@@ -9,18 +9,19 @@
 	<link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body ng-app="zine">
-	<a href="https://github.com/garbados/zine"><img style="position: absolute; top: 0; right: 0; border: 0;" src="img/fork_me_fuck_you_2.png" alt="Fuck you, pay me"></a>
+	<a href="https://github.com/garbados/zine"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 1000;" src="img/fork_me_fuck_you_2.png" alt="Fuck you, pay me"></a>
 	<div class="container">
 		<header class="row">
 			<h1 class="col-xs-12">heck the planet <small>a fucking zine</small>
 			<button ng-controller="UninstallController" ng-click="uninstall()" class="btn btn-link pull-right">Update Zine</button>
 			</h1>
 		</header>
-		<section class="row loading-screen" ng-controller="SetupController" ng-hide="loaded">
+		<section class="row loading-screen" ng-controller="SetupController" ng-hide="consent &&loaded">
 			<div class="jumbotron text-center">
 				<h1>Loading...</h1>
 				<p>I'm currently installing software on your browser, because that's a thing js apps can do these days.</p>
 				<p>Specifically, <a href="js-ext/angular.min.js">angular</a> and <a href="js-ext/pouchdb.min.js">pouchdb</a>. They generate the zine's interface.</p>
+				<button class="btn btn-default" ng-click="i_consent()">I consent.</button>
 			</div>
 		</section>
 		<section ng-controller="NavController">
@@ -56,7 +57,7 @@
 				</div><!-- /.container-fluid -->
 			</nav>
 		</section>
-		<section class="row">
+		<section class="row" ng-show="consent && loaded">
 			<div class="col-xs-12" ng-view></div>
 		</section>
 	</div>
